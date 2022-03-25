@@ -1,1 +1,1 @@
-# Web-application-SPA-using-JavaScript
+# Web Application (SPA)-using JavaScript
