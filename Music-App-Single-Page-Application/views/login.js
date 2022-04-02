@@ -1,8 +1,8 @@
 import { html } from 'https://unpkg.com/lit-html?module';
 
-export default () => html `
+export default ({ onLoginSubmit }) => html `
 <section id="loginPage">
-<form>
+<form @submit=${onLoginSubmit}>
     <fieldset>
         <legend>Login</legend>
 

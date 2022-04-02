@@ -10,6 +10,7 @@ import details from "./views/details.js";
 import search from "./views/search.js";
 import catalog from "./views/catalog.js";
 import notFound from "./views/not-found.js";
+import { onLoginSubmit } from "./eventListeners.js";
 
 
 const routes = [{
@@ -19,6 +20,7 @@ const routes = [{
     {
         path: "/login",
         template: login,
+        context: { onLoginSubmit }
     },
     {
         path: "/register",
@@ -64,8 +66,9 @@ const router = (path) => {
     history.pushState("", {}, path);
 
     let route = routes.find((x) => x.path == path) || routes.find((x) => x.path == "/not-found");
+    let context = route.context;
 
-    render(layout(route.template(), { navigationHandler }), document.getElementById("main-content"));
+    render(layout(route.template(context), { navigationHandler }), document.getElementById("main-content"));
 };
 
 export default router;
