@@ -1,7 +1,8 @@
 import { html } from 'https://unpkg.com/lit-html?module';
 
-export default () => html `<section id="registerPage">
-<form>
+export default ({ onRegisterinSubmit }) => html `
+<section id="registerPage">
+<form @submit=${onRegisterinSubmit}>
     <fieldset>
         <legend>Register</legend>
 
@@ -17,7 +18,7 @@ export default () => html `<section id="registerPage">
         <button type="submit" class="register">Register</button>
 
         <p class="field">
-            <span>If you already have profile click <a href="#">here</a></span>
+            <span>If you already have profile click <a href="/login">here</a></span>
         </p>
     </fieldset>
 </form>

@@ -1,5 +1,8 @@
 import { html, render } from "https://unpkg.com/lit-html?module";
 
+import authService from "./services/authService.js";
+import musicService from "./services/musicService.js";
+
 import layout from "./views/layout.js";
 import home from "./views/home.js";
 import login from "./views/login.js";
@@ -10,7 +13,7 @@ import details from "./views/details.js";
 import search from "./views/search.js";
 import catalog from "./views/catalog.js";
 import notFound from "./views/not-found.js";
-import { onLoginSubmit } from "./eventListeners.js";
+import { onLoginSubmit, onRegisterinSubmit, onCreateSubmit } from "./eventListeners.js";
 
 
 const routes = [{
@@ -25,10 +28,20 @@ const routes = [{
     {
         path: "/register",
         template: register,
+        context: { onRegisterinSubmit }
+    },
+    {
+        path: "/logout",
+        template: () => {
+            authService.logout();
+            history.pushState({}, '', '/')
+            return home();
+        }
     },
     {
         path: "/create",
         template: create,
+        context: { onCreateSubmit }
     },
     {
         path: "/edit",
@@ -45,6 +58,7 @@ const routes = [{
     {
         path: "/catalog",
         template: catalog,
+        context: { getAlbums: musicService.getAll }
     },
     {
         path: "/not-found",
@@ -67,8 +81,8 @@ const router = (path) => {
 
     let route = routes.find((x) => x.path == path) || routes.find((x) => x.path == "/not-found");
     let context = route.context;
-
-    render(layout(route.template(context), { navigationHandler }), document.getElementById("main-content"));
+    let userData = authService.getData();
+    render(layout(route.template, { navigationHandler, ...userData, ...context }), document.getElementById("main-content"));
 };
 
 export default router;

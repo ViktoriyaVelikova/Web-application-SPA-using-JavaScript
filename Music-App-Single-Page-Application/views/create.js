@@ -1,7 +1,7 @@
 import { html } from 'https://unpkg.com/lit-html?module';
 
-export default () => html ` <section class="createPage">
-<form>
+export default ({ onCreateSubmit }) => html ` <section class="createPage">
+<form @submit=${onCreateSubmit}>
     <fieldset>
         <legend>Add Album</legend>
 

@@ -1,21 +1,30 @@
 import { html } from 'https://unpkg.com/lit-html?module';
 
-export default () => html ` <section id="catalogPage">
+const userDetailsBtn = html `
+  <div class="btn-group">
+      <a href="/details" id="details">Details</a>
+    </div>`;
+
+const loginForDeails = html `
+  <p style="color:wheat"><a href="/login" style="color:Tomato">Login</a> to view details.</p>`;
+
+export default ({ navigationHandler, isAuthenticated, getAlbums }) => html ` 
+<section id="catalogPage">
 <h1>All Albums</h1>
 
-<div class="card-box">
+<div class="card-box" @click=${navigationHandler}>
     <img src="./images/BrandiCarlile.png">
     <div>
-        <div class="text-center">
+        <div class="text-center" >
             <p class="name">Name: In These Silent Days</p>
             <p class="artist">Artist: Brandi Carlile</p>
             <p class="genre">Genre: Low Country Sound Music</p>
             <p class="price">Price: $12.80</p>
             <p class="date">Release Date: October 1, 2021</p>
         </div>
-        <div class="btn-group">
-            <a href="/details" id="details">Details</a>
-        </div>
+        ${isAuthenticated 
+        ? userDetailsBtn
+        : loginForDeails}
     </div>
 </div>
 
