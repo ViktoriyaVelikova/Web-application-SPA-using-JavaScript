@@ -1,0 +1,34 @@
+import * as api from './api.js';
+import * as request from './requester.js';
+
+const USER_KEY = 'user';
+
+export const login = (email, password) => {
+    return request.post(api.login, { email, password })
+        .then(user => {
+            saveUser(user);
+            return user
+        });
+};
+
+export const register = (email, password) => {
+    return request.post(api.register, { email, password })
+        .then(user => {
+            saveUser(user);
+            return user
+        });
+};
+
+function saveUser(data) {
+    localStorage.setItem('user', JSON.stringify(data));
+}
+
+function getUser() {
+    let user = localStorage.getItem(USER_KEY)
+
+    if (user) {
+        return JSON.parse(user);
+    }
+
+    return {};
+}

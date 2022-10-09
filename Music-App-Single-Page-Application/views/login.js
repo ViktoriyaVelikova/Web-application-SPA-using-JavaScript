@@ -1,6 +1,7 @@
-import { html } from 'https://unpkg.com/lit-html?module';
+import { html } from '../node_modules/lit-html/lit-html.js';
+import * as authService from '../services/authService.js'
 
-export default ({ onLoginSubmit }) => html `
+const loginTemplate = (onLoginSubmit) => html `
 <section id="loginPage">
 <form @submit=${onLoginSubmit}>
     <fieldset>
@@ -20,3 +21,20 @@ export default ({ onLoginSubmit }) => html `
     </fieldset>
 </form>
 </section>`;
+
+export function renderLogin(ctx) {
+    const onLoginSubmit = (e) => {
+        e.preventDefault();
+
+        let formData = new FormData(e.target);
+        let email = formData.get('email');
+        let password = formData.get('password');
+
+        authService.login(email, password)
+            .then(() => {
+                ctx.page.redirect('/');
+            });
+    };
+
+    ctx.render(loginTemplate(onLoginSubmit));
+};

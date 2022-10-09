@@ -1,6 +1,6 @@
-import { html, render } from "https://unpkg.com/lit-html?module";
+import { render } from "../node_modules/lit-html/lit-html.js";
 
-const navElement = document.getElementById('box');
+const navElement = document.getElementById('header-nav');
 
 import { renderNavigation } from '../views/header.js'
 

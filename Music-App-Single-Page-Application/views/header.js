@@ -1,4 +1,4 @@
-import { html } from "https://unpkg.com/lit-html?module";
+import { html } from '../node_modules/lit-html/lit-html.js';
 
 const guestNavigation = html `
 <li><a href="/login">Login</a></li>
@@ -9,17 +9,15 @@ const userNavigation = html `
 <li><a href="/logout">Logout</a></li>`;
 
 const navigationTemplate = () => html `
-<header >
     <nav>
       <img src="./images/headphones.png" />
       <a href="/">Home</a>
       <ul>
         <li><a href="/catalog">Catalog</a></li>
         <li><a href="/search">Search</a></li>
-
+${guestNavigation}
       </ul>
-    </nav>
-  </header>`;
+    </nav>`;
 
 export const renderNavigation = (ctx) => {
     return navigationTemplate();
