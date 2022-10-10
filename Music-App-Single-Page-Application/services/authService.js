@@ -11,6 +11,9 @@ export const login = (email, password) => {
         });
 };
 
+export const logout = () => {
+    localStorage.setItem(USER_KEY, '');
+}
 export const register = (email, password) => {
     return request.post(api.register, { email, password })
         .then(user => {
@@ -23,12 +26,16 @@ function saveUser(data) {
     localStorage.setItem('user', JSON.stringify(data));
 }
 
-function getUser() {
-    let user = localStorage.getItem(USER_KEY)
+export function getUser() {
 
-    if (user) {
-        return JSON.parse(user);
+    try {
+        let user = localStorage.getItem(USER_KEY)
+
+        if (user) {
+            return JSON.parse(user);
+        }
+    } catch (error) {
+        return undefined;
     }
 
-    return {};
 }

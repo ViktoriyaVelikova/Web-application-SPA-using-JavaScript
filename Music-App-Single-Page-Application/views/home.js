@@ -1,6 +1,6 @@
 import { html } from '../node_modules/lit-html/lit-html.js';
 
-export default () => html `
+const homeTemplate = (user) => html `
 <!--Home Page-->
 <section id="welcomePage">
             <div id="welcome-message">
@@ -13,3 +13,6 @@ export default () => html `
             </div>
 </section>
 `;
+export const renderHome = (ctx) => {
+    ctx.render(homeTemplate());
+}

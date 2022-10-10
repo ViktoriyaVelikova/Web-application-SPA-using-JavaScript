@@ -1,29 +1,23 @@
 import { navigationMiddleware } from "./middlewares/navigationMiddleware.js";
 import { renderMiddleware } from "./middlewares/renderMiddleware.js";
+import { authMiddleware } from "./middlewares/authMiddleware.js";
 
 import page from "../node_modules/page/page.mjs";
 
 import { renderLogin } from './views/login.js'
 import { renderRegister } from './views/register.js'
+import { renderLogout } from './views/logout.js'
+import { renderHome } from './views/home.js'
 
-//  import layout from "./views/layout.js";
-//import home from "./views/home.js";
-// import login from "./views/login.js";
-// import register from "./views/register.js";
-// import create from "./views/create.js";
-// import edit from "./views/edit.js";
-// import details from "./views/details.js";
-// import search from "./views/search.js";
-// import catalog from "./views/catalog.js";
-// import notFound from "./views/not-found.js";
 
+page(authMiddleware);
 page(navigationMiddleware);
 page(renderMiddleware);
 
-//page("/", home);
+page("/", renderHome);
 page("/login", renderLogin);
-
 page("/register", renderRegister);
+page("/logout", renderLogout);
 // page("/create", create);
 // page("/catalog", catalog);
 // page("/details/:id", details);
