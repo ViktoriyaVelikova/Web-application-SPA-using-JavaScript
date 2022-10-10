@@ -38,16 +38,9 @@ export function renderCreate(ctx) {
     const onCreateSubmit = (e) => {
         e.preventDefault();
 
-        let formData = new FormData(e.target);
-        let name = formData.get('name');
-        let imgUrl = formData.get('imgUrl');
-        let price = formData.get('price');
-        let releaseDate = formData.get('releaseDate');
-        let artist = formData.get('artist');
-        let genre = formData.get('genre');
-        let description = formData.get('description');
+        let formData = Object.fromEntries(new FormData(e.currentTarget));
 
-        albumService.createAlbum(name, imgUrl, price, releaseDate, artist, genre, description)
+        albumService.createAlbum(formData)
             .then(() => {
                 ctx.page.redirect('/');
             });

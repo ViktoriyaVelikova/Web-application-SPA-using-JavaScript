@@ -20,8 +20,8 @@ page("/login", renderLogin);
 page("/register", renderRegister);
 page("/logout", renderLogout);
 page("/catalog", rendeCatalog);
-
 page("/create", renderCreate);
+
 // page("/details/:id", details);
 // page("/edit/:id", edit);
 // page("/search", search);
