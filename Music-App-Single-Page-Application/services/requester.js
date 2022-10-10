@@ -14,6 +14,7 @@ const request = async(method, url, body) => {
 
     let response = await fetch(url, options);
     let data = await response.json();
+    console.log(data)
     return data;
 };
 

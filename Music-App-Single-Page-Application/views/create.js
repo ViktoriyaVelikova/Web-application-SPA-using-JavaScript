@@ -1,6 +1,7 @@
 import { html } from '../node_modules/lit-html/lit-html.js';
+import * as albumService from '../services/albumService.js';
 
-export default ({ onCreateSubmit }) => html ` <section class="createPage">
+const createTemplate = (onCreateSubmit) => html ` <section class="createPage">
 <form @submit=${onCreateSubmit}>
     <fieldset>
         <legend>Add Album</legend>
@@ -32,3 +33,25 @@ export default ({ onCreateSubmit }) => html ` <section class="createPage">
     </fieldset>
 </form>
 </section>`;
+
+export function renderCreate(ctx) {
+    const onCreateSubmit = (e) => {
+        e.preventDefault();
+
+        let formData = new FormData(e.target);
+        let name = formData.get('name');
+        let imgUrl = formData.get('imgUrl');
+        let price = formData.get('price');
+        let releaseDate = formData.get('releaseDate');
+        let artist = formData.get('artist');
+        let genre = formData.get('genre');
+        let description = formData.get('description');
+
+        albumService.createAlbum(name, imgUrl, price, releaseDate, artist, genre, description)
+            .then(() => {
+                ctx.page.redirect('/');
+            });
+    };
+
+    ctx.render(createTemplate(onCreateSubmit));
+};

@@ -37,5 +37,21 @@ export function getUser() {
     } catch (error) {
         return undefined;
     }
+}
 
+export function getData() {
+    try {
+        let data = JSON.parse(localStorage.getItem(USER_KEY));
+
+        return {
+            isAuthenticated: Boolean(data.idToken),
+            email: data.email,
+            idToken: data.idToken
+        };
+    } catch (error) {
+        return {
+            isAuthenticated: false,
+            email: ''
+        };
+    }
 }

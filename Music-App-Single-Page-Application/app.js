@@ -8,7 +8,8 @@ import { renderLogin } from './views/login.js'
 import { renderRegister } from './views/register.js'
 import { renderLogout } from './views/logout.js'
 import { renderHome } from './views/home.js'
-
+import { rendeCatalog } from './views/catalog.js'
+import { renderCreate } from './views/create.js'
 
 page(authMiddleware);
 page(navigationMiddleware);
@@ -18,8 +19,9 @@ page("/", renderHome);
 page("/login", renderLogin);
 page("/register", renderRegister);
 page("/logout", renderLogout);
-// page("/create", create);
-// page("/catalog", catalog);
+page("/catalog", rendeCatalog);
+
+page("/create", renderCreate);
 // page("/details/:id", details);
 // page("/edit/:id", edit);
 // page("/search", search);
