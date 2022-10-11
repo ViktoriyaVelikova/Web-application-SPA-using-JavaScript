@@ -30,16 +30,12 @@ const catalogTemplate = (allAlbums) => html `
 <section id="catalogPage">
 <h1>All Albums</h1>
 
-${console.log(allAlbums)}
-
  ${allAlbums.length ? allAlbums.map(albumTemplate) : html`<p>No Albums in Catalog!</p>`}
 
 </section>`;
 
 export async function rendeCatalog (ctx)  {
     let allAlbums = await albumService.getAll();
-
-    console.log(allAlbums);
 
     ctx.render(catalogTemplate(allAlbums));
 }

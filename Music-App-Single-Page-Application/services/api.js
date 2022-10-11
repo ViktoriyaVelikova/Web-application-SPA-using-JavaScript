@@ -10,6 +10,8 @@ let endpoints = {
 export const login = `${ endpoints.login }`;
 export const register = `${ endpoints.register }`;
 
+export const details = (id) => `https://musicappspa-default-rtdb.firebaseio.com/albums/${id}.json`;
+
 export const urlBuilder = (resource) => {
     return `${endpoints.baseUrl}/${resource}.json?auth=${getData().idToken}`
 }

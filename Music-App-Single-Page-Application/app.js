@@ -10,6 +10,8 @@ import { renderLogout } from './views/logout.js'
 import { renderHome } from './views/home.js'
 import { rendeCatalog } from './views/catalog.js'
 import { renderCreate } from './views/create.js'
+import { renderDetails } from './views/details.js'
+import { renderEdit } from "./views/edit.js";
 
 page(authMiddleware);
 page(navigationMiddleware);
@@ -21,9 +23,9 @@ page("/register", renderRegister);
 page("/logout", renderLogout);
 page("/catalog", rendeCatalog);
 page("/create", renderCreate);
+page("/details/:id", renderDetails);
 
-// page("/details/:id", details);
-// page("/edit/:id", edit);
+page("/edit/:id", renderEdit);
 // page("/search", search);
 // page("/not-found", notFound);
 

@@ -40,6 +40,11 @@ export function renderCreate(ctx) {
 
         let formData = Object.fromEntries(new FormData(e.currentTarget));
 
+        if (Object.keys(formData).some(key => !formData[key])) {
+            alert('All fields are required.')
+            return
+        }
+
         albumService.createAlbum(formData)
             .then(() => {
                 ctx.page.redirect('/');

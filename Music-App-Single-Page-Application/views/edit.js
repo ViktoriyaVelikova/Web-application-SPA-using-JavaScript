@@ -1,7 +1,8 @@
 import { html } from '../node_modules/lit-html/lit-html.js';
+import * as albumService from '../services/albumService.js';
 
-export default () => html ` <section class="editPage">
-<form>
+const editTemplate = (album, onEditSubmit) => html ` <section class="editPage">
+<form @submit=${onEditSubmit}>
     <fieldset>
         <legend>Edit Album</legend>
 
@@ -32,3 +33,26 @@ export default () => html ` <section class="editPage">
     </fieldset>
 </form>
 </section>`;
+
+export async function renderEdit(ctx) {
+
+    let album = await albumService.getOne(ctx.params.id)
+
+    const onEditSubmit = (e) => {
+        e.preventDefault();
+
+        let formData = Object.fromEntries(new FormData(e.currentTarget));
+
+        if (Object.keys(formData).some(key => !formData[key])) {
+            alert('All fields are required.')
+            return
+        }
+
+        albumService.editAlbum(ctx.params.id, formData)
+            .then(() => {
+                ctx.page.redirect('/');
+            });
+    };
+
+    ctx.render(editTemplate(album, onEditSubmit));
+};
