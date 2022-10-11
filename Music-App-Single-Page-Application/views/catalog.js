@@ -4,7 +4,7 @@ import * as albumService from '../services/albumService.js';
 const loginForDeails = html `
   <p style="color:wheat"><a href="/login" style="color:Tomato">Login</a> to view details.</p>`;
 
-const albumTemplate = (album, user) => html `
+export const albumTemplate = (album, user) => html `
 <div class="card-box">
     <img src="${album.imgUrl}">
     <div>

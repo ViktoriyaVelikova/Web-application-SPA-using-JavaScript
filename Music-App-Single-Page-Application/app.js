@@ -29,7 +29,4 @@ page("/details/:id", renderDetails);
 page("/edit/:id", renderEdit);
 page("/delete/:id", renderDelete);
 
-// page("/search", search);
-// page("/not-found", notFound);
-
 page.start();

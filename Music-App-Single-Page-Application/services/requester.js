@@ -11,7 +11,7 @@ const request = async(method, url, body) => {
             body: JSON.stringify({...body, returnSecureToken: true }),
         });
     }
-
+    console.log(url)
     let response = await fetch(url, options);
     let data = await response.json();
     console.log(data)

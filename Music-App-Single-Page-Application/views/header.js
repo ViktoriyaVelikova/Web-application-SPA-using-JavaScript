@@ -11,7 +11,6 @@ const navigationTemplate = (user) => html ` <nav>
   <a href="/">Home</a>
   <ul>
     <li><a href="/catalog">Catalog</a></li>
-    <li><a href="/search">Search</a></li>
     ${user ? userNavigation() : guestNavigation()}
   </ul>
 </nav>`;
