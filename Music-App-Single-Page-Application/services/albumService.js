@@ -8,8 +8,8 @@ export async function getAll() {
     return res
 }
 
-export const createAlbum = (musicData) => {
-    let res = request.post(api.urlBuilder('albums'), musicData);
+export const createAlbum = (musicData, email) => {
+    let res = request.post(api.urlBuilder('albums'), {...musicData, email });
     return res;
 }
 
@@ -21,5 +21,10 @@ export const editAlbum = (id, musicData) => {
 
 export async function getOne(id) {
     let res = await request.get(api.details(id));
+    return res;
+}
+export const deleteAlbum = (id) => {
+    let resource = `albums/${id}`
+    let res = request.del(api.urlBuilder(resource));
     return res;
 }

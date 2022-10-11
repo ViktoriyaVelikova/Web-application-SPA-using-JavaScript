@@ -45,7 +45,7 @@ export function renderCreate(ctx) {
             return
         }
 
-        albumService.createAlbum(formData)
+        albumService.createAlbum(formData, ctx.user.email)
             .then(() => {
                 ctx.page.redirect('/');
             });

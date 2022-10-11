@@ -12,6 +12,7 @@ import { rendeCatalog } from './views/catalog.js'
 import { renderCreate } from './views/create.js'
 import { renderDetails } from './views/details.js'
 import { renderEdit } from "./views/edit.js";
+import { renderDelete } from "./views/delete.js";
 
 page(authMiddleware);
 page(navigationMiddleware);
@@ -23,9 +24,11 @@ page("/register", renderRegister);
 page("/logout", renderLogout);
 page("/catalog", rendeCatalog);
 page("/create", renderCreate);
-page("/details/:id", renderDetails);
 
+page("/details/:id", renderDetails);
 page("/edit/:id", renderEdit);
+page("/delete/:id", renderDelete);
+
 // page("/search", search);
 // page("/not-found", notFound);
 

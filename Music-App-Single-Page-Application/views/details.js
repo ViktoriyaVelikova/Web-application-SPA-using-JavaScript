@@ -1,11 +1,10 @@
-import { html } from '../node_modules/lit-html/lit-html.js';
+import { html, nothing } from '../node_modules/lit-html/lit-html.js';
 import * as albumService from '../services/albumService.js';
 
-const detailsTemplate = (album, id) => html `
+const detailsTemplate = (album, id, creator) => html `
 <section id="detailsPage">
   <div class="wrapper">
     <div class="albumCover">
-    ${console.log(id)}
       <img src="${album.imgUrl}" />
     </div>
     <div class="albumInfo">
@@ -21,18 +20,21 @@ const detailsTemplate = (album, id) => html `
       </div>
 
       <!-- Only for registered user and creator of the album-->
-      <div class="actionBtn">
+      ${creator 
+        ? html `<div class="actionBtn">
         <a href="/edit/${id}" class="edit">Edit</a>
         <a href="/delete/${id}" class="remove">Delete</a>
-      </div>
+      </div>`
+      : nothing}
+      
     </div>
   </div>
 </section>`;
 
-export async function renderDetails(ctx) {
-    await albumService.getOne(ctx.params.id)
+export const renderDetails = (ctx) => {
+    albumService.getOne(ctx.params.id)
         .then(album => {
-            ctx.render(detailsTemplate(album, ctx.params.id));
+          let creator = ctx.user.email == album.email;
+            ctx.render(detailsTemplate(album, ctx.params.id, creator));
         })
-
-};
+}
